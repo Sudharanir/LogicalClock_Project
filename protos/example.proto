@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+// service definition
+service RPCServicer {
+  // defining RPC service.
+  rpc MsgDelivery(Request) returns (ClockResponse) {}
+}
+
+message Events {
+    int32 id = 1;
+    string interface = 2;
+    int32 money = 3;
+}
+
+// The request message containing id, events and clock
+message Request {
+  int32 id = 1;
+  repeated Events events = 2;
+  int32 clock = 3;
+}
+
+message EventExecuted {
+  int32 id = 1;
+  string name = 2;
+  int32 clock = 3;
+}
+
+// The response message for clock recordings
+message ClockResponse {
+  int32 id = 1;
+  repeated EventExecuted data = 2;
+}
+
+message Recv {
+  string interface = 1;
+  string result = 2;
+  int32 money = 3;
+}
+
+// The response message for events
+message Response {
+  int32 id = 1;
+  repeated Recv recv = 2;
+}
